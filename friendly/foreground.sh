@@ -1,2 +1,2 @@
-./launch.sh
-cls
+launch.sh
+clear

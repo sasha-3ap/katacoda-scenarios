@@ -1,18 +1,18 @@
+
 # Tekton configuration
 Now that we have our cluster ready, we need to setup our tekton-demo namespace and RBAC. We will keep everything inside this single namespace for easy cleanup. In the unlikely event that you get stuck/flummoxed, the best course of action might be to just delete this namespace and start fresh. You should take note of the ingress subdomain, or the external IP of your cluster, you will need this for your Webhook in later steps.
 
-## Create the tekton-demo namespace, where all our resources will live.
+Create the tekton-demo namespace, where all our resources will live.
 `kubectl create namespace tekton-demo`{{execute}}
 
-## Create the admin user, role and rolebinding
+Create the admin user, role and rolebinding
 `kubectl apply -f ./rbac/admin-role.yaml`{{execute}}
 
-## Create the create-webhook user, role and rolebinding
+Create the create-webhook user, role and rolebinding
 `kubectl apply -f ./rbac/webhook-role.yaml`{{execute}}
 This will allow our webhook to create the things it needs to.
 
-# Install the Pipeline and Triggers
-## Install the Pipeline
+Install the Pipeline
 Now we have to install the Pipeline we plan to use and also our Triggers resources.
 
 `kubectl apply -f pipeline.yaml`{{execute}}
@@ -33,6 +33,8 @@ Now we have to install the Pipeline we plan to use and also our Triggers resourc
     `kubectl apply -f triggers.yaml`{{execute}}
   - Expose listener on node port 30300
     `kubectl apply -f event-listener-exposed.yaml`{{execute}}
+    Note domain [[HOST_SUBDOMAIN]]-30300-[[KATACODA_HOST]].environments.katacoda.com as we will need it to setup our Github webhook.
+
 If that succeeded, your cluster is ready to start handling Events.
 `tkn triggerbinding list --namespace tekton-demo`{{execute}}
 
@@ -96,8 +98,11 @@ GitHubRepo: The repo we will be using for this example.
 ExternalDomain: Update this to be the to something other then demo.iancoffey.com
 Run the Webhook Task
 Now lets run our updated webhook task.
+[[HOST_SUBDOMAIN]]-30300-[[KATACODA_HOST]].environments.katacoda.com
 
-`kubectl apply -f webhook-run.yaml`{{execute}}
+`echo "Enter domain?"; read token; sed "s/EXTERNAL_DOMAIN/[[HOST_SUBDOMAIN]]-30300-[[KATACODA_HOST]].environments.katacoda.com/" webhook-run.yaml | kubectl apply -f -`{{execute}}
+
+`echo "Enter domain?"; read token; sed "s/EXTERNAL_DOMAIN/${token}/" webhook-run.yaml | kubectl apply -f -`{{execute}}
 
 Commit and push an empty commit to your development repo.
 `git checkout -b "demo-branch"; git commit -a -m "build commit" --allow-empty && git push origin mybranch`{{execute}}

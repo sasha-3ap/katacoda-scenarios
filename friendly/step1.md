@@ -32,6 +32,6 @@ Install registry proxy:
 
 ## Registry UI
 Install registry UI:
-`kubectl apply -f ~/registry-ui.yaml`{{execute}}
+`kubectl apply -f registry-ui.yaml`{{execute}}
 
 Open registry ui at https://[[HOST_SUBDOMAIN]]-31000-[[KATACODA_HOST]].environments.katacoda.com/

@@ -1,20 +1,24 @@
 {
-  "title": "New Title",
-  "description": "New Desc",
+  "title": "Tekton - Kubernetes native framework for CI/CD",
+  "description": "Let's explore Tekton by ",
   "difficulty": "Beginner",
   "time": "20",
   "details": {
     "steps": [
       {
-        "title": "Step 1",
+        "title": "Cluster configuration - Install registry",
         "text": "step1.md"
       },
       {
-        "title": "Step 2",
+        "title": "Cluster configuration - Install tekton",
         "text": "step2.md"
       },
       {
-        "title": "Step 3",
+        "title": "Tekton configuration - building pipeline",
+        "text": "step3.md"
+      },
+      {
+        "title": "Tekton consideration ",
         "text": "step3.md"
       }
     ],

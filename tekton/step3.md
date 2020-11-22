@@ -1,5 +1,5 @@
 
-# Tekton configuration
+# Pipeline configuration
 Now that we have our cluster ready, we need to setup our tekton-demo namespace and RBAC. We will keep everything inside this single namespace for easy cleanup. In the unlikely event that you get stuck/flummoxed, the best course of action might be to just delete this namespace and start fresh. You should take note of the ingress subdomain, or the external IP of your cluster, you will need this for your Webhook in later steps.
 
 Create the tekton-demo namespace, where all our resources will live.
@@ -23,7 +23,7 @@ Now we have to install the Pipeline we plan to use and also our Triggers resourc
 
 `tkn pipeline list --namespace tekton-demo`{{execute}}
 
-## Install Triggers
+## Triggers configuration
 
 - We will setup an EventListener to accept and process GitHub Push events
 - A TriggerTemplate to create templated PipelineResource and PipelineRun resources per event received by the EventListener.
@@ -33,7 +33,8 @@ Now we have to install the Pipeline we plan to use and also our Triggers resourc
     `kubectl apply -f triggers.yaml`{{execute}}
   - Expose listener on node port 30300
     `kubectl apply -f event-listener-exposed.yaml`{{execute}}
-    Note domain [[HOST_SUBDOMAIN]]-30300-[[KATACODA_HOST]].environments.katacoda.com as we will need it to setup our Github webhook.
+
+  Note domain `[[HOST_SUBDOMAIN]]-30300-[[KATACODA_HOST]].environments.katacoda.com` as we will need it to setup our Github webhook.
 
 If that succeeded, your cluster is ready to start handling Events.
 `tkn triggerbinding list --namespace tekton-demo`{{execute}}
@@ -43,35 +44,14 @@ If that succeeded, your cluster is ready to start handling Events.
 `tkn eventlistener list --namespace tekton-demo`{{execute}}
 
 
-## Add Ingress and GitHub-Webhook Tasks
-// We will need an ingress to handle incoming webhooks and we will make use of our new ingress by configuring GitHub with our GitHub Task.
-
-// First lets create our ingress Task.
-
-// `kubectl apply -f create-ingress.yaml -n tekton-demo`{{execute}}
+## GitHub-Webhook Tasks
 
 Now lets create our webhook Task.
 
 `kubectl apply -f create-webhook.yaml -n tekton-demo`{{execute}}
 
 Check new tekton tasks are created
-`tkn tasks list`{{execute}}
-
-
-<!-- ## Run Ingress Task
-### Update the Ingress TaskRun
-Note: If you are running on GKE, the default Ingress will not work. Instead, follow the instructions to use an Nginx Ingress here
-
-Lets first update the TaskRun to make any needed changes
-
-Edit the ingress-run.yaml file to adjust the settings.
-
-At the minimum, you will need to update the ExternalDomain field to match your own DNS name.
-
-Run the Ingress Task
-When you are ready, run the ingress Task.
-
-`kubectl apply -f ingress-run.yaml` -->
+`tkn tasks list -n tekton-demo`{{execute}}
 
 
 ## Run GitHub Webhook Task
@@ -98,8 +78,6 @@ GitHubRepo: The repo we will be using for this example.
 ExternalDomain: Update this to be the to something other then demo.iancoffey.com
 Run the Webhook Task
 Now lets run our updated webhook task.
-[[HOST_SUBDOMAIN]]-30300-[[KATACODA_HOST]].environments.katacoda.com
-
 `sed "s/EXTERNAL_DOMAIN/[[HOST_SUBDOMAIN]]-30300-[[KATACODA_HOST]].environments.katacoda.com/" webhook-run.yaml | kubectl apply -f -`{{execute}}
 
 Commit and push an empty commit to your development repo.

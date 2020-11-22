@@ -1,1 +1,1 @@
-# Hello there
+This workshop is based on official Tekton examples with few adjustments adn demonstrates how easy is to create CI/CD system using Tekton.

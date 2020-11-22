@@ -1,5 +1,5 @@
 {
-  "title": "3apedia: Tekton - Kubernetes native CI/CD framework",
+  "title": "Tekton - Kubernetes native CI/CD framework",
   "description": "Let's explore Tekton by example, learn about its building blocks and build CI/CD system along the way.",
   "difficulty": "Intermediate",
   "time": "60",
@@ -15,10 +15,6 @@
       },
       {
         "title": "Tekton configuration - building pipeline",
-        "text": "step3.md"
-      },
-      {
-        "title": "Tekton consideration ",
         "text": "step3.md"
       }
     ],

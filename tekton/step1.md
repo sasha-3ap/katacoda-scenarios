@@ -1,7 +1,7 @@
 
 ## Git repo
 Throughout this workshop we will need configuration files to configure our Kubernetes cluster and later Tekton. Intentionally we keep our configuration togather with app ulmacea source code. Let's clone the repo and change into folder cluster:
-`git clone https://github.com/sashamirkovic/ulmaceae.git; cd ulmacea/cluster`{{execute}}
+`git clone https://github.com/sashamirkovic/ulmaceae.git; cd ulmaceae/cluster`{{execute}}
 
 Next, let's setup private image repository as we will need it for our CI/CD.
 

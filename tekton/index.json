@@ -21,7 +21,7 @@
     "intro": {
       "text": "intro.md",
       "code": "foreground.sh",
-      "credits": "This Tekton workshop is part 3apedia event organized by [3ap](https://3ap.ch)"
+      "credits": "This Tekton tutorial is part of 3apedia event organized by [3ap](https://3ap.ch)"
     },
     "finish": {
       "text": "finish.md"

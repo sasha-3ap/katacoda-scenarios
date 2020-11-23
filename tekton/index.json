@@ -1,5 +1,5 @@
 {
-  "title": "Tekton - Kubernetes native CI/CD framework",
+  "title": "Building Tekton based cloud native CI/CD system",
   "description": "Let's explore Tekton by example, learn about its building blocks and build CI/CD system along the way.",
   "difficulty": "Intermediate",
   "time": "60",
@@ -21,14 +21,14 @@
     "intro": {
       "text": "intro.md",
       "code": "foreground.sh",
-      "credits": "3apedia is organized by [3ap](https://3ap.ch)"
+      "credits": "This Tekton workshop is part 3apedia event organized by [3ap](https://3ap.ch)"
     },
     "finish": {
       "text": "finish.md"
     }
   },
   "environment": {
-    "uieditorpath": "/root/example",
+    "uieditorpath": "/root/ulmaceae",
     "showide": true,
     "idePort": 23000,
     "uilayout": "terminal"

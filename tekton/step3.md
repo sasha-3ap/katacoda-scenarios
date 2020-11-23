@@ -89,7 +89,7 @@ Configure git before using it:
 
 If you use 2 step authentication on Github, create PAT to authenticate.
 
-Delete existing image: `kubectl delete pod tekton-triggers-built-me -n tekton-demo`{{execute}}
+Delete pod created by last webhook call: `kubectl delete pod tekton-triggers-built-me -n tekton-demo`{{execute}}
 
 Commit and push an empty commit to your development repo. 
 `git checkout -b "demo-branch"; git commit -a -m "build commit" --allow-empty && git push origin demo-branch`{{execute}}

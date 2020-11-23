@@ -80,5 +80,16 @@ Run the Webhook Task
 Now lets run our updated webhook task.
 `sed "s/EXTERNAL_DOMAIN/[[HOST_SUBDOMAIN]]-30300-[[KATACODA_HOST]].environments.katacoda.com/" webhook-run.yaml | kubectl apply -f -`{{execute}}
 
-Commit and push an empty commit to your development repo.
-`git checkout -b "demo-branch"; git commit -a -m "build commit" --allow-empty && git push origin mybranch`{{execute}}
+As a results webhook will be created in our repo and immediately send event that will trigger building process through our EventListener.
+
+### CI/CD system in action
+Configure git before using it:
+`git config --global user.email "you@example.com"`{{copy}}
+`git config --global user.name "Your Name"`{{copy}}
+
+If you use 2 step authentication on Github, create PAT to authenticate.
+
+Delete existing image: `kubectl delete pod tekton-triggers-built-me -n tekton-demo`{{execute}}
+
+Commit and push an empty commit to your development repo. 
+`git checkout -b "demo-branch"; git commit -a -m "build commit" --allow-empty && git push origin demo-branch`{{execute}}

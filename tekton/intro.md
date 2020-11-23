@@ -1,4 +1,6 @@
-[Tekton](https://tekton.dev) is cloud native CI/CD framework and in this tutorial we will use it to build an CI/CD system. Along the way you will learn:
+[Tekton](https://tekton.dev) is cloud native CI/CD framework and in this tutorial we will use it to build an CI/CD system. 
+
+Along the way you will learn:
 
 - How to install a private registry with a UI
 - How to install the Tekton Pipeline and Triggers controller, Tekton Dashboard and CLI tool

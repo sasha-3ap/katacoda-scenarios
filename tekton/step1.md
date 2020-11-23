@@ -9,8 +9,7 @@ Next, let's setup private image repository as we will need it for our CI/CD.
 Add stable repo:
 `helm repo add stable https://kubernetes-charts.storage.googleapis.com`{{execute}}
 
-Install docker registry:
-
+Install docker registry:  
 `helm install registry stable/docker-registry \
   --version 1.9.4 \
   --namespace kube-system \
@@ -22,7 +21,7 @@ Install docker registry:
 Add helm repo
 `helm repo add incubator http://storage.googleapis.com/kubernetes-charts-incubator`{{execute}}
 
-Install registry proxy:
+Install registry proxy:  
 `helm install registry-proxy incubator/kube-registry-proxy \
   --version 0.3.2 \
   --namespace kube-system \

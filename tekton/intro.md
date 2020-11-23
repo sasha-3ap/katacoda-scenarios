@@ -5,5 +5,5 @@ Along the way you will learn:
 - How to install a private registry with a UI
 - How to install the Tekton Pipeline and Triggers controller, Tekton Dashboard and CLI tool
 - How to declare Pipeline and Trigger resources specific to defining a CI/CD system
-- About various Tekton resources like Resources, Tasks, and Pipelines
+- About various Tekton Pipeline and Trigger related resources
 - How to trigger a pipeline with (Github) event and inspect its progress

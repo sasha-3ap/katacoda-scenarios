@@ -1,6 +1,6 @@
   
 
-# Pipeline configuration
+# Tekton components configuration
 Now that we have our cluster ready, we need to setup our tekton-demo namespace and RBAC. We will keep everything inside this single namespace for easy cleanup. In the unlikely event that you get stuck/flummoxed, the best course of action might be to just delete this namespace and start fresh. You should take note of the ingress subdomain, or the external IP of your cluster, you will need this for your Webhook in later steps.
 
 Create the tekton-demo namespace, where all our resources will live:  
@@ -13,6 +13,7 @@ Create the create-webhook user, role and rolebinding:
 `kubectl apply -f ./rbac/webhook-role.yaml`{{execute}}  
 
 This will allow our webhook to create the things it needs to.
+
 
 ## Pipeline configuration
 Now we have to install the Pipeline we plan to use and also our Triggers resources:  
@@ -37,10 +38,10 @@ Pipelines:
 
 Note domain `[[HOST_SUBDOMAIN]]-30300-[[KATACODA_HOST]].environments.katacoda.com` as we will need it to setup our Github webhook.
 
-If that succeeded, your cluster is ready to start handling Events. Check TrigerBindings:  
+If that succeeded, your cluster is ready to start handling Events. Check TriggerBindings:  
 `tkn triggerbinding list --namespace tekton-demo`{{execute}}  
 
-TrigerTemplates:  
+TriggerTemplates:  
 `tkn triggertemplate list --namespace tekton-demo`{{execute}}  
 
 EventListeners:  
@@ -64,7 +65,7 @@ Next, create a secret like so with your access token.
 `echo "Enter Github access token?"; read token; sed "s/YOUR-GITHUB-ACCESS-TOKEN/${token}/" webhook-secret.yaml | kubectl apply -f -`{{execute}}
 
 ## Run the Webhook Task
-Now lets run our updated webhook task.
+Now lets run our webhook task.
 `sed "s/EXTERNAL_DOMAIN/[[HOST_SUBDOMAIN]]-30300-[[KATACODA_HOST]].environments.katacoda.com/" webhook-run.yaml | kubectl apply -f -`{{execute}}
 
 As a results webhook will be created in our repo and immediately send event that will trigger building process through our EventListener. You can follow Pipeline run in Tekton dashboard or using Tekton CLI:  

@@ -1,27 +1,31 @@
   
+  
 # Pipeline configuration
 Now that we have our cluster ready, we need to setup our tekton-demo namespace and RBAC. We will keep everything inside this single namespace for easy cleanup. In the unlikely event that you get stuck/flummoxed, the best course of action might be to just delete this namespace and start fresh. You should take note of the ingress subdomain, or the external IP of your cluster, you will need this for your Webhook in later steps.
 
-Create the tekton-demo namespace, where all our resources will live.
+Create the tekton-demo namespace, where all our resources will live:  
 `kubectl create namespace tekton-demo`{{execute}}
 
-Create the admin user, role and rolebinding
+Create the admin user, role and rolebinding:  
 `kubectl apply -f ./rbac/admin-role.yaml`{{execute}}
 
-Create the create-webhook user, role and rolebinding
-`kubectl apply -f ./rbac/webhook-role.yaml`{{execute}}
+Create the create-webhook user, role and rolebinding:  
+`kubectl apply -f ./rbac/webhook-role.yaml`{{execute}}  
+
 This will allow our webhook to create the things it needs to.
 
-Install the Pipeline
-Now we have to install the Pipeline we plan to use and also our Triggers resources.
+## Pipeline configuration
+Now we have to install the Pipeline we plan to use and also our Triggers resources:  
+`kubectl apply -f pipeline.yaml`{{execute}}  
 
-`kubectl apply -f pipeline.yaml`{{execute}}
-
+Use Tekton CLI tool `tkn` to list newly created resources, like conditions:  
 `tkn condition list --namespace tekton-demo`{{execute}}
 
-`tkn task list --namespace tekton-demo`{{execute}}
+Tasks:  
+`tkn task list --namespace tekton-demo`{{execute}}  
 
-`tkn pipeline list --namespace tekton-demo`{{execute}}
+Pipelines:  
+`tkn pipeline list --namespace tekton-demo`{{execute}}  
 
   
 ## Triggers configuration
